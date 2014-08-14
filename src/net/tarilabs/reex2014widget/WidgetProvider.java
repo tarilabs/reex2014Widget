@@ -22,31 +22,31 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 public class WidgetProvider extends AppWidgetProvider {
-	 
+
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 		for (int i = 0; i < appWidgetIds.length; i++) {
-	      int appWidgetId = appWidgetIds[i];
-	      
-	      updateAppWidget(context, appWidgetManager, appWidgetId);
-	    }
-	  }
+			int appWidgetId = appWidgetIds[i];
+			updateAppWidget(context, appWidgetManager, appWidgetId);
+		}
+	}
 
-	public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+	public static void updateAppWidget(Context context,	AppWidgetManager appWidgetManager, int appWidgetId) {
 		SharedPreferences prefs = context.getSharedPreferences(Configure.SHARED_PREF_NAME, Context.MODE_PRIVATE);
 		String cogitoBaseURL = prefs.getString(Configure.SHARED_PREF_KEY, "asd");
-		Log.i("net.tarilabs", "cogito base URL from prefs: "+cogitoBaseURL);
-	    
+		Log.i("net.tarilabs", "cogito base URL from prefs: " + cogitoBaseURL);
+
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
-	      
-	      (new FetchCogitoTask(views, appWidgetId, appWidgetManager)).execute(cogitoBaseURL + "/restapi/ruleengine/query/cogitoergosum");
-	      
-	      Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-	      PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-	      
-	      views.setOnClickPendingIntent(R.id.cogitoLabel, pendingIntent);
-	      appWidgetManager.updateAppWidget(appWidgetId, views);
+
+		FetchCogitoTask asyncTask = new FetchCogitoTask(views, appWidgetId, appWidgetManager);
+		asyncTask.execute(cogitoBaseURL + "/restapi/ruleengine/query/cogitoergosum");
+
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(cogitoBaseURL + "/explore.xhtml#cogitoergosum"));
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
+		views.setOnClickPendingIntent(R.id.cogitoLabel, pendingIntent);
+		appWidgetManager.updateAppWidget(appWidgetId, views);
 	}
 }
 
@@ -74,17 +74,19 @@ class FetchCogitoTask extends AsyncTask<String, Void, String> {
 
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
 			String s = "";
+			StringBuilder rBuilder = new StringBuilder();
 			while ((s = buffer.readLine()) != null) {
-				response += s;
+				rBuilder.append(s);
 			}
 			// REST api first is array of Drools Query
-			JSONArray jsonArray = new JSONArray(response);
+			JSONArray jsonArray = new JSONArray(rBuilder.toString());
 			// this Drools business query result 1st slot is object row of cogito and $text
 			JSONObject jsonObject = jsonArray.getJSONObject(0);
 			// get the $text
 			response = jsonObject.getString("$text");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e("net.tarilabs", "Something wrong while asyncTask: "+e.getMessage(), e);
+			response = "Connection error.";
 		}
 		return response;
 	}

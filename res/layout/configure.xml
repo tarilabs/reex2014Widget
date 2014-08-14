@@ -11,17 +11,10 @@
         android:layout_alignParentTop="true"
         android:inputType="textUri"
         android:ems="10"
-        android:text="http://192.168.0.13:8080/reex2014" >
+        android:text="@string/defaultHostURL" >
 
         <requestFocus />
     </EditText>
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editText1"
-        android:text="Enter hostname, port and context root.\n I will append the /restapi/ruleengine/query to the HTTP request." />
 
     <Button
         android:id="@+id/cfgButtonCreate"
@@ -29,8 +22,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="Create" />
+        android:text="@string/cfgButtonCreateText" />
 
-
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/cfgEditTextURL"
+        android:text="@string/ConfigureActivityQuickHelp" />
 
 </RelativeLayout>

@@ -2,4 +2,18 @@
 
     <string name="app_name">reex2014 Widget</string>
 
+    <string name="titleBar">reex2014</string>
+
+    <string name="defaultWidgetText">Cogito Ergo Sum</string>
+
+    <string name="defaultHostURL">http://192.168.0.13:8080/reex2014</string>
+
+    <string name="cfgButtonCreateText">Create</string>
+
+    <string name="ConfigureActivityQuickHelp">Enter hostname, port and context root.\n I will append the /restapi/ruleengine/query to the HTTP request.</string>
+
+    <string name="ManifestWidgetLabel">aaa test</string>
+
+    <string name="ManifestConfigureActivityLabel">aaa test config</string>
+
 </resources>
