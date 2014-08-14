@@ -6,7 +6,8 @@
     android:minResizeHeight="72dp"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1800000"
-    android:initialLayout="@layout/widget">
+    android:initialLayout="@layout/widget"
+	android:configure="net.tarilabs.reex2014widget.Configure" >
     
     <!-- TODO for the moment we hard-code update every 30m with updatePeriodMillis, later we config -->
 
