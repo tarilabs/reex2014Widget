@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:minWidth="146dp"
+    android:minHeight="72dp"
+    android:minResizeWidth="146dp"
+    android:minResizeHeight="72dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="1800000"
+    android:initialLayout="@layout/widget">
+    
+    <!-- TODO for the moment we hard-code update every 30m with updatePeriodMillis, later we config -->
+
+</appwidget-provider>
