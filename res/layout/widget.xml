@@ -27,7 +27,7 @@
         android:textStyle="italic"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:background="#99000000"
+        android:background="#BB000000"
         android:text="@string/defaultWidgetText" />
     
 </LinearLayout>
