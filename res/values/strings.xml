@@ -6,7 +6,7 @@
 
     <string name="defaultWidgetText">Cogito Ergo Sum</string>
 
-    <string name="defaultHostURL">http://192.168.0.13:8080/reex2014</string>
+    <string name="defaultHostURL">http://reex2014-tarilabs.rhcloud.com</string>
 
     <string name="cfgButtonCreateText">Create</string>
 
